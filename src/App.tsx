@@ -1,8 +1,11 @@
+import { Provider } from 'react-redux';
 import NavBar from './components/NavBar';
 import ProductPage from './components/ProductPage';
+import { store } from './store/store';
 
 export class Product {
 	'name': string;
+	'id': string;
 	'description': string;
 	'price': number;
 	'discount': number;
@@ -13,6 +16,7 @@ export class Product {
 function App() {
 	const fallSneaker: Product = {
 		name: 'Fall Limited Edition Sneakers',
+		id: '33',
 		description: `These low-profile sneakers are your perfect casual wear companion.
   Featuring a durable rubber outer sole, they’ll withstand everything
   the weather can offer.`,
@@ -32,12 +36,14 @@ function App() {
 		],
 	};
 	return (
-		<div className='md:mx-10 lg:mx-24 font-kumbhSans'>
-			<NavBar />
-			<div className='mt-14 md:mt-28'>
-				<ProductPage product={fallSneaker} />
+		<Provider store={store}>
+			<div className='md:mx-10 lg:mx-24 font-kumbhSans'>
+				<NavBar />
+				<div className='mt-14 md:mt-28'>
+					<ProductPage product={fallSneaker} />
+				</div>
 			</div>
-		</div>
+		</Provider>
 	);
 }
 

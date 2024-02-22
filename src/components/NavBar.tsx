@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import SideBar from './SideBar';
 import CartModal from './CartModal';
-import Cart from './Cart';
+import Cart from './icons/Cart';
+import { useStoreSelector } from '../store/hooks';
 
 function NavBar() {
+	const cartCount: number = useStoreSelector((state) => {
+		return state.cart.cartItems.reduce((val, item) => {
+			return val + item.quantity;
+		}, 0);
+	});
 	const links = ['Collections', 'Men', 'Women', 'About', 'Contact'];
 	const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 	const [isCartOpen, setIsCartOpen] = useState(false);
@@ -54,7 +60,7 @@ function NavBar() {
 					>
 						<Cart />
 						<span className='bg-orange-400 px-2 text-white rounded-full absolute top-1 right-1 text-[12px]'>
-							3
+							{cartCount > 0 ? cartCount : ''}
 						</span>
 					</button>
 					<img
