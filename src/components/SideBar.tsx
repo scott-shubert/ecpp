@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 
 function SideBar({ onClose, links }: { onClose: () => void; links: string[] }) {
 	return ReactDOM.createPortal(
-		<div>
+		<div className='z-50'>
 			<div
 				className='absolute inset-0 bg-gray-300 opacity-80'
 				onClick={onClose}

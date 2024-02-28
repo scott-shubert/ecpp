@@ -6,13 +6,13 @@ export const currencyUSD = new Intl.NumberFormat('en-US', {
 });
 
 export const getRetailPrice = (product: Product) => {
-	return currencyUSD.format(
-		product.price - product.price * (product.discount / 100)
-	);
+	return currencyUSD.format(getPrice(product));
 };
 
 export const getRetailTotal = (product: Product, quantity: number) => {
-	return currencyUSD.format(
-		quantity * (product.price - product.price * (product.discount / 100))
-	);
+	return currencyUSD.format(quantity * getPrice(product));
 };
+
+function getPrice(product: Product) {
+	return product.price - product.price * (product.discount / 100);
+}

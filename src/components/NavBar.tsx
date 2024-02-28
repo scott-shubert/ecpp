@@ -43,7 +43,7 @@ function NavBar() {
 
 	return (
 		<>
-			<div className='fixed top-0 inset-x-0 h-14 md:h-28 bg-white border-b-2 border-gray-300 max-md:px-6 md:mx-10 lg:mx-24 flex justify-between'>
+			<div className='fixed top-0 inset-x-0 h-14 md:h-28 bg-white border-b-2 border-gray-300 max-md:px-6 md:mx-10 lg:mx-24 flex justify-between z-30'>
 				<div className='flex items-center gap-4 md:gap-6'>
 					<img
 						src='../../images/icon-menu.svg'
