@@ -1,30 +1,26 @@
-import { useState } from 'react';
-import { Product } from '../App';
-import ArrowLeft from './icons/ArrowLeft';
-import ArrowRight from './icons/ArrowRight';
+import { useState } from 'react'
+import { Product } from '../App'
+import ArrowLeft from './icons/ArrowLeft'
+import ArrowRight from './icons/ArrowRight'
 
 function ProductImages({ product }: { product: Product }) {
-	const [activeIndex, setActiveIndex] = useState(0);
-
-	const handleClickThumbnail = (i: number) => {
-		setActiveIndex(i);
-	};
+	const [activeIndex, setActiveIndex] = useState(0)
 
 	const handleClickLeft = () => {
 		if (activeIndex === 0) {
-			setActiveIndex(product.thumbnails.length - 1);
+			setActiveIndex(product.thumbnails.length - 1)
 		} else {
-			setActiveIndex(activeIndex - 1);
+			setActiveIndex(activeIndex - 1)
 		}
-	};
+	}
 
 	const handleClickRight = () => {
 		if (activeIndex === product.thumbnails.length - 1) {
-			setActiveIndex(0);
+			setActiveIndex(0)
 		} else {
-			setActiveIndex(activeIndex + 1);
+			setActiveIndex(activeIndex + 1)
 		}
-	};
+	}
 
 	return (
 		<div className='md:max-w-[600px] justify-self-end'>
@@ -51,14 +47,14 @@ function ProductImages({ product }: { product: Product }) {
 							<img
 								src={thumbnail}
 								className='rounded-md hover:opacity-50'
-								onClick={() => handleClickThumbnail(i)}
+								onClick={() => setActiveIndex(i)}
 							/>
 						</div>
-					);
+					)
 				})}
 			</div>
 		</div>
-	);
+	)
 }
 
-export default ProductImages;
+export default ProductImages

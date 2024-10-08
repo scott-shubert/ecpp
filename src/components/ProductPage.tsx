@@ -1,28 +1,16 @@
-import { useState } from 'react';
-import { Product } from '../App';
-import Cart from './icons/Cart';
-import Minus from './icons/Minus';
-import Plus from './icons/Plus';
-import ProductImages from './ProductImages';
-import { addToCart } from '../store/cart-slice';
-import { useStoreDispatch } from '../store/hooks';
-import { currencyUSD, getRetailPrice } from '../utils/CurrencyFormatter';
+import { useState } from 'react'
+import { Product } from '../App'
+import Cart from './icons/Cart'
+import Minus from './icons/Minus'
+import Plus from './icons/Plus'
+import ProductImages from './ProductImages'
+import { addToCart } from '../store/cart-slice'
+import { useStoreDispatch } from '../store/hooks'
+import { currencyUSD, getRetailPrice } from '../utils/CurrencyFormatter'
 
 function ProductPage({ product }: { product: Product }) {
-	const dispatch = useStoreDispatch();
-	const [quantity, setQuantity] = useState(1);
-
-	const increaseQuantity = () => {
-		setQuantity(quantity + 1);
-	};
-
-	const decreaseQuantity = () => {
-		if (quantity > 0) setQuantity(quantity - 1);
-	};
-
-	const handleAddToCart = () => {
-		dispatch(addToCart({ product: product, quantity: quantity }));
-	};
+	const dispatch = useStoreDispatch()
+	const [quantity, setQuantity] = useState(1)
 
 	return (
 		<div className='md:pt-16 md:px-8 grid grid-cols-1 md:grid-cols-2 justify-center h-[900px] gap-4 md:gap-12 lg:gap-24'>
@@ -50,20 +38,24 @@ function ProductPage({ product }: { product: Product }) {
 					<div className='flex gap-8 items-center justify-between md:max-w-48 bg-slate-100 rounded-lg text-orange-400 font-bold text-4xl h-14'>
 						<button
 							className='fill-orange-400 hover:fill-orange-300 px-4 h-full'
-							onClick={decreaseQuantity}
+							onClick={() => {
+								if (quantity > 0) setQuantity(quantity - 1)
+							}}
 						>
 							<Minus />
 						</button>
 						<div className='text-black text-lg '>{quantity}</div>
 						<button
 							className='fill-orange-400 hover:fill-orange-300 px-4 h-full'
-							onClick={increaseQuantity}
+							onClick={() => setQuantity(quantity + 1)}
 						>
 							<Plus />
 						</button>
 					</div>
 					<button
-						onClick={handleAddToCart}
+						onClick={() =>
+							dispatch(addToCart({ product: product, quantity: quantity }))
+						}
 						className='bg-orange-400 rounded-lg max-w-96 text-white flex-auto fill-white flex items-center justify-center gap-4 hover:bg-orange-300 h-14'
 					>
 						<Cart /> <span>Add to cart</span>
@@ -71,7 +63,7 @@ function ProductPage({ product }: { product: Product }) {
 				</div>
 			</div>
 		</div>
-	);
+	)
 }
 
-export default ProductPage;
+export default ProductPage

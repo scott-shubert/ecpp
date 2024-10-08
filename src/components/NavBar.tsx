@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import SideBar from './SideBar';
-import CartModal from './CartModal';
-import Cart from './icons/Cart';
-import { useStoreSelector } from '../store/hooks';
+import { useState } from 'react'
+import SideBar from './SideBar'
+import CartModal from './CartModal'
+import Cart from './icons/Cart'
+import { useStoreSelector } from '../store/hooks'
 
 function NavBar() {
 	const cartCount: number = useStoreSelector((state) => {
 		return state.cart.cartItems.reduce((val, item) => {
-			return val + item.quantity;
-		}, 0);
-	});
-	const links = ['Collections', 'Men', 'Women', 'About', 'Contact'];
-	const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-	const [isCartOpen, setIsCartOpen] = useState(false);
+			return val + item.quantity
+		}, 0)
+	})
+	const links = ['Collections', 'Men', 'Women', 'About', 'Contact']
+	const [isSideBarOpen, setIsSideBarOpen] = useState(false)
+	const [isCartOpen, setIsCartOpen] = useState(false)
 
 	const renderedLinks = links.map((link) => {
 		return (
@@ -22,25 +22,8 @@ function NavBar() {
 			>
 				{link}
 			</a>
-		);
-	});
-
-	const handleMenuClick = () => {
-		setIsSideBarOpen(true);
-	};
-
-	const handleCloseSideBar = () => {
-		setIsSideBarOpen(false);
-	};
-
-	const handleCartClick = () => {
-		setIsCartOpen(true);
-	};
-
-	const handleCloseCart = () => {
-		setIsCartOpen(false);
-	};
-
+		)
+	})
 	return (
 		<>
 			<div className='fixed top-0 inset-x-0 h-14 md:h-28 bg-white border-b-2 border-gray-300 max-md:px-6 md:mx-10 lg:mx-24 flex justify-between z-30'>
@@ -48,7 +31,7 @@ function NavBar() {
 					<img
 						src='../../images/icon-menu.svg'
 						className='w-6 lg:hidden hover:cursor-pointer'
-						onClick={handleMenuClick}
+						onClick={() => setIsSideBarOpen(true)}
 					/>
 					<img src='../../images/logo.svg' className='w-32 mr-10' />
 					{renderedLinks}
@@ -56,7 +39,7 @@ function NavBar() {
 				<div className='flex items-center gap-4 md:gap-10'>
 					<button
 						className='relative p-4 fill-gray-500 hover:fill-black '
-						onClick={handleCartClick}
+						onClick={() => setIsCartOpen(true)}
 					>
 						<Cart />
 						<span className='bg-orange-400 px-2 text-white rounded-full absolute top-1 right-1 text-[12px]'>
@@ -69,10 +52,12 @@ function NavBar() {
 					/>
 				</div>
 			</div>
-			{isSideBarOpen && <SideBar onClose={handleCloseSideBar} links={links} />}
-			{isCartOpen && <CartModal onClose={handleCloseCart} />}
+			{isSideBarOpen && (
+				<SideBar onClose={() => setIsSideBarOpen(false)} links={links} />
+			)}
+			{isCartOpen && <CartModal onClose={() => setIsCartOpen(false)} />}
 		</>
-	);
+	)
 }
 
-export default NavBar;
+export default NavBar

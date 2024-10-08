@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'
 
 function SideBar({ onClose, links }: { onClose: () => void; links: string[] }) {
 	return ReactDOM.createPortal(
@@ -13,13 +13,17 @@ function SideBar({ onClose, links }: { onClose: () => void; links: string[] }) {
 				</button>
 				<div className='grid gap-6 mt-12'>
 					{links.map((link: string) => {
-						return <a className='font-bold hover:cursor-pointer'>{link}</a>;
+						return (
+							<a key={link} className='font-bold hover:cursor-pointer'>
+								{link}
+							</a>
+						)
 					})}
 				</div>
 			</div>
 		</div>,
 		document.querySelector('.portal')!
-	);
+	)
 }
 
-export default SideBar;
+export default SideBar
